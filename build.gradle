@@ -1,0 +1,75 @@
+plugins {
+    id 'fabric-loom' version '1.7-SNAPSHOT'   // 使用最新的 Loom 插件
+    id 'maven-publish'
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        name = 'Fabric'
+        url = 'https://maven.fabricmc.net/'
+    }
+}
+
+dependencies {
+    // Minecraft 和映射
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+
+    // Fabric API（可选，但您使用了 fabric-api 所以需要）
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+
+    // 确保 Mixin 注解处理器运行（Loom 会自动配置，但显式添加无害）
+    annotationProcessor 'org.spongepowered:mixin:0.8.7'
+}
+
+loom {
+    // 配置 Mixin，确保 refmap 生成
+    mixin {
+        defaultRefmapName = 'teasememe.refmap.json'  // 与 mixins.json 中指定的 refmap 一致
+    }
+    // 如果有 Access Widener，可以在此配置
+    // accessWidenerPath = file("src/main/resources/teasememe.accesswidener")
+}
+
+java {
+    withSourcesJar()
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
+
+tasks.withType(JavaCompile).configureEach {
+    it.options.encoding = 'UTF-8'
+    it.options.release = 21
+}
+
+processResources {
+    inputs.property "version", project.version
+    inputs.property "minecraft_version", project.minecraft_version
+    inputs.property "loader_version", project.loader_version
+    filteringCharset "UTF-8"
+
+    filesMatching("fabric.mod.json") {
+        expand "version": project.version,
+                "minecraft_version": project.minecraft_version,
+                "loader_version": project.loader_version
+    }
+}
+
+jar {
+    from("LICENSE") {
+        rename { "${it}_${project.archives_base_name}" }
+    }
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+    repositories {
+        mavenLocal()
+    }
+}
