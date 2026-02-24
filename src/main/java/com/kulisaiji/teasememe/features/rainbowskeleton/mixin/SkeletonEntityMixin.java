@@ -14,15 +14,15 @@ public abstract class SkeletonEntityMixin {
 
     @Inject(method = "initGoals", at = @At("RETURN"))
     private void modifyGoals(CallbackInfo ci) {
-        // 直接使用 this.goalSelector（因为 Mixin 使当前类成为目标类的子类，可以访问 protected 成员）
-        this.goalSelector.getGoals().removeIf(
+        // 移除弓攻击目标，改为近战攻击
+        this.getGoalSelector().getGoals().removeIf(
             entry -> entry.getGoal() instanceof BowAttackGoal
         );
 
-        // 添加近战攻击（需要将 this 强制转换为 SkeletonEntity 以传递给 Goal 构造函数）
-        this.goalSelector.add(2, new MeleeAttackGoal((SkeletonEntity)(Object)this, 1.2, false));
+        // 添加近战攻击目标
+        this.getGoalSelector().add(2, new MeleeAttackGoal((SkeletonEntity)(Object)this, 1.2, false));
 
         // 添加跳跃攻击
-        this.goalSelector.add(3, new JumpAttackGoal((SkeletonEntity)(Object)this));
+        this.getGoalSelector().add(3, new JumpAttackGoal((SkeletonEntity)(Object)this));
     }
 }
