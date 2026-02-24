@@ -10,4 +10,4 @@ public class TeaseMemeClient implements ClientModInitializer {
     public void onInitializeClient() {
         // 客户端初始化（渲染器通过Mixin注入，无需额外代码）
     }
-}<
+}
