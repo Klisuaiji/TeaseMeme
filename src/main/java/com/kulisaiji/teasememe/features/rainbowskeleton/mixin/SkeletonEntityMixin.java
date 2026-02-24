@@ -2,6 +2,7 @@ package com.kulisaiji.teasememe.features.rainbowskeleton.mixin;
 
 import com.kulisaiji.teasememe.features.rainbowskeleton.ai.JumpAttackGoal;
 import net.minecraft.entity.ai.goal.BowAttackGoal;
+import net.minecraft.entity.ai.goal.GoalSelector;  // ← 添加这个导入
 import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.SkeletonEntity;
