@@ -20,8 +20,6 @@ dependencies {
     // Fabric API（可选，但您使用了 fabric-api 所以需要）
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
 
-    // 确保 Mixin 注解处理器运行（Loom 会自动配置，但显式添加无害）
-    annotationProcessor 'org.spongepowered:mixin:0.8.7'
 }
 
 loom {
