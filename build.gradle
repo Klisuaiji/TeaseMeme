@@ -12,14 +12,13 @@ repositories {
 }
 
 dependencies {
-    // Minecraft 和映射
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
-    mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+    // 替换 Yarn 为 Mojang 官方映射
+    mappings loom.layered() {
+        officialMojangMappings()
+    }
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
-
-    // Fabric API（可选，但您使用了 fabric-api 所以需要）
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
-
 }
 
 loom {
