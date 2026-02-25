@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom' version '1.7-SNAPSHOT'   // 使用最新的 Loom 插件
+    id 'fabric-loom' version '1.7.4'   // 使用最新的 Loom 插件
     id 'maven-publish'
 }
 
