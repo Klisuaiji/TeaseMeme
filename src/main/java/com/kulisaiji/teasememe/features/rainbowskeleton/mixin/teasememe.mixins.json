@@ -2,14 +2,13 @@
   "required": true,
   "minVersion": "0.8",
   "package": "com.kulisaiji.teasememe.features.rainbowskeleton.mixin",
-  "refmap": "teasememe.refmap.json",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "LivingEntityRendererAccessor",
     "SkeletonEntityMixin"
   ],
   "client": [
-    "SkeletonEntityRendererMixin"
+    "SkeletonEntityRendererMixin",
+    "LivingEntityRendererAccessor"
   ],
   "injectors": {
     "defaultRequire": 1
