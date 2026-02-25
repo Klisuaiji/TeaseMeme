@@ -7,8 +7,7 @@
     "SkeletonEntityMixin"
   ],
   "client": [
-    "SkeletonEntityRendererMixin",
-    "LivingEntityRendererAccessor"
+    "SkeletonEntityRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1
