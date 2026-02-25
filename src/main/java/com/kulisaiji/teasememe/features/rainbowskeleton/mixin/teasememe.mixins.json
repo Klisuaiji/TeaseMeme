@@ -3,9 +3,7 @@
   "minVersion": "0.8",
   "package": "com.kulisaiji.teasememe.features.rainbowskeleton.mixin",
   "compatibilityLevel": "JAVA_21",
-  "mixins": [
-    "SkeletonEntityMixin"
-  ],
+  "mixins": [],
   "client": [
     "SkeletonEntityRendererMixin"
   ],
