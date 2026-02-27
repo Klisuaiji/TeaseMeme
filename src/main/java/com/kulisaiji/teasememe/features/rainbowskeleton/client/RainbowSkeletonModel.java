@@ -2,9 +2,9 @@ package com.kulisaiji.teasememe.features.rainbowskeleton.client;
 
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.render.entity.model.BipedEntityModel;
-import net.minecraft.entity.mob.AbstractSkeletonEntity;
+import net.minecraft.entity.mob.HostileEntity;
 
-public class RainbowSkeletonModel<T extends AbstractSkeletonEntity> extends BipedEntityModel<T> {
+public class RainbowSkeletonModel<T extends HostileEntity> extends BipedEntityModel<T> {
 
     public RainbowSkeletonModel(ModelPart root) {
         super(root);

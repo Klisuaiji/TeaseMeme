@@ -66,7 +66,8 @@ public class RainbowSkeletonEntity extends HostileEntity implements RangedAttack
     @Override
     public void shootAt(net.minecraft.entity.LivingEntity target, float pullProgress) {
         ItemStack itemStack = this.getStackInHand(net.minecraft.util.Hand.MAIN_HAND);
-        PersistentProjectileEntity persistentProjectileEntity = ProjectileUtil.createArrowProjectile(this, itemStack, pullProgress);
+        ItemStack bowStack = this.getMainHandStack();
+        PersistentProjectileEntity persistentProjectileEntity = ProjectileUtil.createArrowProjectile(this, itemStack, pullProgress, bowStack);
         double d = target.getX() - this.getX();
         double e = target.getBodyY(0.3333333333333333) - persistentProjectileEntity.getY();
         double f = target.getZ() - this.getZ();
