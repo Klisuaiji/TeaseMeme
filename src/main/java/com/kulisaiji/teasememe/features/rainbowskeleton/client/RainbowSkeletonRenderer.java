@@ -8,6 +8,7 @@ import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.render.entity.BipedEntityRenderer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.model.BipedEntityModel;
+import net.minecraft.client.render.entity.model.EntityModelLayers;
 import net.minecraft.util.Identifier;
 
 @Environment(EnvType.CLIENT)
@@ -17,11 +18,11 @@ public class RainbowSkeletonRenderer extends BipedEntityRenderer<RainbowSkeleton
 
     public RainbowSkeletonRenderer(EntityRendererFactory.Context context) {
         super(context, createModel(context), 0.5f);
-        this.addLayer(new RainbowGlowFeature<>(this));
+        this.addFeature(new RainbowGlowFeature<>(this));
     }
 
     private static BipedEntityModel<RainbowSkeletonEntity> createModel(EntityRendererFactory.Context context) {
-        ModelPart root = context.getModelLoader().getPart(context.getModelLoader().getModelRegistry().get(net.minecraft.client.render.entity.model.EntityModelLayers.SKELETON));
+        ModelPart root = context.getPart(EntityModelLayers.SKELETON);
         return new BipedEntityModel<>(root);
     }
 

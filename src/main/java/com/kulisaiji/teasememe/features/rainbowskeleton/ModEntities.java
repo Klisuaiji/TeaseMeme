@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
+import net.minecraft.entity.SpawnLocationTypes;
 import net.minecraft.entity.SpawnRestriction;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.registry.Registries;
@@ -26,7 +27,6 @@ public class ModEntities {
     public static final EntityType<RainbowSkeletonEntity> RAINBOW_SKELETON = EntityType.Builder
             .create(RainbowSkeletonEntity::new, SpawnGroup.MONSTER)
             .dimensions(0.6F, 1.99F)
-            .maxChunkSpeed(8)
             .registryKey(RAINBOW_SKELETON_KEY)
             .build();
 
@@ -35,9 +35,9 @@ public class ModEntities {
 
         SpawnRestriction.register(
                 RAINBOW_SKELETON,
-                SpawnRestriction.Location.ON_GROUND,
+                SpawnLocationTypes.ON_GROUND,
                 Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
-                RainbowSkeletonEntity::canMobSpawn
+                RainbowSkeletonEntity::checkSpawnRules
         );
 
         BiomeModifications.addSpawn(

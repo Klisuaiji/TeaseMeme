@@ -13,6 +13,8 @@ import net.minecraft.entity.passive.TurtleEntity;
 import net.minecraft.entity.passive.WolfEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Items;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
@@ -32,7 +34,7 @@ public class RainbowSkeletonEntity extends AbstractSkeletonEntity {
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 32.0);
     }
 
-    public static boolean canMobSpawn(EntityType<? extends RainbowSkeletonEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
+    public static boolean checkSpawnRules(EntityType<? extends RainbowSkeletonEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
         return MobEntity.canMobSpawn(type, world, spawnReason, pos, random) &&
                 world.getLightLevel(pos) <= 7;
     }
@@ -50,6 +52,11 @@ public class RainbowSkeletonEntity extends AbstractSkeletonEntity {
         this.targetSelector.add(2, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
         this.targetSelector.add(3, new ActiveTargetGoal<>(this, IronGolemEntity.class, true));
         this.targetSelector.add(3, new ActiveTargetGoal<>(this, TurtleEntity.class, true));
+    }
+
+    @Override
+    protected SoundEvent getStepSound() {
+        return SoundEvents.ENTITY_SKELETON_STEP;
     }
 
     @Override
