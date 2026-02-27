@@ -64,7 +64,6 @@ public class RainbowSkeletonEntity extends HostileEntity implements GeoEntity {
     protected void initEquipment(Random random, LocalDifficulty localDifficulty) {
     }
 
-    @Override
     public boolean canEquip(net.minecraft.entity.EquipmentSlot slot) {
         return false;
     }

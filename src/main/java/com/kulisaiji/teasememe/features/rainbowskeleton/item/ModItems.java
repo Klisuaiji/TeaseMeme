@@ -2,9 +2,8 @@ package com.kulisaiji.teasememe.features.rainbowskeleton.item;
 
 import com.kulisaiji.teasememe.features.rainbowskeleton.ModEntities;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.SpawnEggItem;
 import net.minecraft.util.Identifier;
 import net.minecraft.registry.Registries;
@@ -19,7 +18,8 @@ public class ModItems {
             0x00FF00
     );
 
-    private static Item registerSpawnEgg(String name, EntityType<?> entityType, int primaryColor, int secondaryColor) {
+    @SuppressWarnings("unchecked")
+    private static Item registerSpawnEgg(String name, EntityType<? extends MobEntity> entityType, int primaryColor, int secondaryColor) {
         SpawnEggItem spawnEggItem = new SpawnEggItem(
                 entityType,
                 primaryColor,

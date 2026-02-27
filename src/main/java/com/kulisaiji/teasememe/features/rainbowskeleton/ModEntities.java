@@ -15,7 +15,9 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.Heightmap;
-import net.minecraft.world.biome.Biome;
+import net.minecraft.registry.tag.TagKey;
+import net.minecraft.util.Identifier;
+import net.minecraft.registry.RegistryKeys;
 
 public class ModEntities {
 
@@ -38,9 +40,7 @@ public class ModEntities {
         );
 
         BiomeModifications.addSpawn(
-                BiomeSelectors.categories(
-                        Biome.Category.OVERWORLD
-                ),
+                BiomeSelectors.foundInOverworld(),
                 SpawnGroup.MONSTER,
                 RAINBOW_SKELETON,
                 40,
