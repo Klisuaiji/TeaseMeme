@@ -1,39 +1,52 @@
+
+
 # 梗蛊不变
 
 #### 介绍
-{**以下是 Gitee 平台说明，您可以替换此简介**
-Gitee 是 OSCHINA 推出的基于 Git 的代码托管平台（同时支持 SVN）。专为开发者提供稳定、高效、安全的云端软件开发协作平台
-无论是个人、团队、或是企业，都能够用 Gitee 实现代码托管、项目管理、协作开发。企业项目请看 [https://gitee.com/enterprises](https://gitee.com/enterprises)}
+
+梗蛊不变 是一个基于 Fabric 的 Minecraft 模组，添加了一个独特的彩虹骷髅（Rainbow Skeleton）生物。这个模组为游戏世界引入了新的挑战——拥有彩虹外观和特殊攻击能力的骷髅敌人。
 
 #### 软件架构
-软件架构说明
 
+- **核心框架**: Fabric (Minecraft 1.20+ 模组加载器)
+- **实体系统**: 自定义 HostileEntity
+- **动画系统**: Geckolib 4.0
+- **AI 行为**: 自定义 Goal 攻击模式
+- **客户端渲染**: GeoRenderer + 自定义模型
+
+#### 功能特性
+
+- 🌈 **彩虹骷髅** - 拥有彩虹渐变外观的骷髅生物
+- ⚔️ **跳跃攻击** - 独特的跳跃攻击 AI 行为
+- 📦 **刷怪蛋** - 可用于生成彩虹骷髅的刷怪蛋
+- 🌞 **日光燃烧** - 白天会自动燃烧（类似普通骷髅）
 
 #### 安装教程
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+1. 确保已安装 Fabric Loader 和 Fabric API
+2. 下载对应版本的模组 JAR 文件
+3. 将模组放入 `.minecraft/mods` 文件夹
+4. 启动游戏即可
 
 #### 使用说明
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+1. 在游戏中使用彩虹骷髅刷怪蛋生成该生物
+2. 彩虹骷髅会自动寻找玩家并发起跳跃攻击
+3. 击败后可获得战利品
+
+#### 模组信息
+
+- **作者**: kulisaiji_owo
+- **版本**: 1.0.0
+- **适用游戏版本**: Minecraft 1.20+
 
 #### 参与贡献
 
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
+1. Fork 本仓库
+2. 新建 Feat_xxx 分支
+3. 提交代码
+4. 新建 Pull Request
 
+#### 许可证
 
-#### 特技
-
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+本项目遵循 MIT 许可证。
