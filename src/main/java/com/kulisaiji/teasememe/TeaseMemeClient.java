@@ -1,5 +1,6 @@
 package com.kulisaiji.teasememe;
 
+import com.kulisaiji.teasememe.features.rainbowskeleton.ModEntitiesClient;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -8,6 +9,6 @@ import net.fabricmc.api.Environment;
 public class TeaseMemeClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
-        // 客户端初始化（渲染器通过Mixin注入，无需额外代码）
+        ModEntitiesClient.registerClient();
     }
 }
