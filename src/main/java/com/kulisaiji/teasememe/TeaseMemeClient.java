@@ -4,11 +4,13 @@ import com.kulisaiji.teasememe.features.rainbowskeleton.ModEntitiesClient;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import software.bernie.geckolib.GeckoLib;
 
 @Environment(EnvType.CLIENT)
 public class TeaseMemeClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
+        GeckoLib.initialize();
         ModEntitiesClient.registerClient();
     }
 }

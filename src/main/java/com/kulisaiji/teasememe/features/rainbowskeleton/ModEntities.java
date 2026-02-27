@@ -2,6 +2,7 @@ package com.kulisaiji.teasememe.features.rainbowskeleton;
 
 import com.kulisaiji.teasememe.TeaseMemeMod;
 import com.kulisaiji.teasememe.features.rainbowskeleton.entity.RainbowSkeletonEntity;
+import com.kulisaiji.teasememe.features.rainbowskeleton.item.ModItems;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
@@ -14,7 +15,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.Heightmap;
-import net.minecraft.world.biome.BiomeKeys;
+import net.minecraft.world.biome.Biome;
 
 public class ModEntities {
 
@@ -37,22 +38,18 @@ public class ModEntities {
         );
 
         BiomeModifications.addSpawn(
-                BiomeSelectors.includeByKey(
-                        BiomeKeys.DESERT,
-                        BiomeKeys.BADLANDS,
-                        BiomeKeys.ERODED_BADLANDS,
-                        BiomeKeys.WOODED_BADLANDS,
-                        BiomeKeys.SAVANNA,
-                        BiomeKeys.SAVANNA_PLATEAU,
-                        BiomeKeys.WINDSWEPT_SAVANNA
+                BiomeSelectors.categories(
+                        Biome.Category.OVERWORLD
                 ),
                 SpawnGroup.MONSTER,
                 RAINBOW_SKELETON,
-                80,
+                40,
                 1,
-                4
+                2
         );
 
-        TeaseMemeMod.LOGGER.info("彩虹骷髅实体已注册!");
+        ModItems.register();
+
+        TeaseMemeMod.LOGGER.info("彩色骷髅实体已注册!");
     }
 }

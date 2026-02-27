@@ -1,12 +1,24 @@
 package com.kulisaiji.teasememe.features.rainbowskeleton.client;
 
-import net.minecraft.client.model.ModelPart;
-import net.minecraft.client.render.entity.model.BipedEntityModel;
-import net.minecraft.entity.mob.HostileEntity;
+import com.kulisaiji.teasememe.TeaseMemeMod;
+import com.kulisaiji.teasememe.features.rainbowskeleton.entity.RainbowSkeletonEntity;
+import net.minecraft.util.Identifier;
+import software.bernie.geckolib.model.GeoModel;
 
-public class RainbowSkeletonModel<T extends HostileEntity> extends BipedEntityModel<T> {
+public class RainbowSkeletonModel extends GeoModel<RainbowSkeletonEntity> {
 
-    public RainbowSkeletonModel(ModelPart root) {
-        super(root);
+    @Override
+    public Identifier getModelResource(RainbowSkeletonEntity animatable) {
+        return Identifier.of(TeaseMemeMod.MOD_ID, "geo/rainbowskeleton.geo.json");
+    }
+
+    @Override
+    public Identifier getTextureResource(RainbowSkeletonEntity animatable) {
+        return Identifier.of(TeaseMemeMod.MOD_ID, "textures/entity/rainbowskeleton.png");
+    }
+
+    @Override
+    public Identifier getAnimationResource(RainbowSkeletonEntity animatable) {
+        return Identifier.of(TeaseMemeMod.MOD_ID, "animations/rainbowskeleton.animation.json");
     }
 }

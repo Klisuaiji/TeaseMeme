@@ -2,32 +2,41 @@ package com.kulisaiji.teasememe.features.rainbowskeleton.client;
 
 import com.kulisaiji.teasememe.TeaseMemeMod;
 import com.kulisaiji.teasememe.features.rainbowskeleton.entity.RainbowSkeletonEntity;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import net.minecraft.client.model.ModelPart;
-import net.minecraft.client.render.entity.BipedEntityRenderer;
+import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRendererFactory;
-import net.minecraft.client.render.entity.model.BipedEntityModel;
-import net.minecraft.client.render.entity.model.EntityModelLayers;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
+import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
-@Environment(EnvType.CLIENT)
-public class RainbowSkeletonRenderer extends BipedEntityRenderer<RainbowSkeletonEntity, BipedEntityModel<RainbowSkeletonEntity>> {
+public class RainbowSkeletonRenderer extends GeoEntityRenderer<RainbowSkeletonEntity> {
 
-    private static final Identifier TEXTURE = Identifier.of(TeaseMemeMod.MOD_ID, "textures/entity/skeleton_glow.png");
-
-    public RainbowSkeletonRenderer(EntityRendererFactory.Context context) {
-        super(context, createModel(context), 0.5f);
-        this.addFeature(new RainbowGlowFeature<>(this));
-    }
-
-    private static BipedEntityModel<RainbowSkeletonEntity> createModel(EntityRendererFactory.Context context) {
-        ModelPart root = context.getPart(EntityModelLayers.SKELETON);
-        return new BipedEntityModel<>(root);
+    public RainbowSkeletonRenderer(EntityRendererFactory.Context renderManager) {
+        super(renderManager, new RainbowSkeletonModel());
+        this.shadowRadius = 0.5f;
     }
 
     @Override
-    public Identifier getTexture(RainbowSkeletonEntity entity) {
-        return TEXTURE;
+    public RenderLayer getRenderType(RainbowSkeletonEntity animatable, Identifier texture, VertexConsumerProvider bufferSource, float partialTick) {
+        return RenderLayer.getEntityTranslucentEmissive(texture);
+    }
+
+    @Override
+    public void render(RainbowSkeletonEntity entity, float entityYaw, float partialTick, MatrixStack poseStack,
+                       VertexConsumerProvider bufferSource, int packedLight) {
+        double x = entity.getX();
+        double z = entity.getZ();
+        float time = (entity.getWorld().getTime() + partialTick) / 20.0f;
+
+        float red = 0.5f + 0.5f * (float) Math.sin(x * 0.2 + time * 2);
+        float green = 0.5f + 0.5f * (float) Math.sin(x * 0.2 + time * 2 + 2);
+        float blue = 0.5f + 0.5f * (float) Math.sin(x * 0.2 + time * 2 + 4);
+
+        this.renderColor[0] = red;
+        this.renderColor[1] = green;
+        this.renderColor[2] = blue;
+        this.renderColor[3] = 0.7f;
+
+        super.render(entity, entityYaw, partialTick, poseStack, bufferSource, 0xF000F0);
     }
 }

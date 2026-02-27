@@ -1,30 +1,31 @@
 package com.kulisaiji.teasememe.features.rainbowskeleton.entity;
 
-import com.kulisaiji.teasememe.features.rainbowskeleton.ai.JumpAttackGoal;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.ai.RangedAttackMob;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.entity.passive.IronGolemEntity;
-import net.minecraft.entity.passive.TurtleEntity;
-import net.minecraft.entity.passive.WolfEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.PersistentProjectileEntity;
-import net.minecraft.entity.projectile.ProjectileUtil;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
+import software.bernie.geckolib.animatable.GeoAnimatable;
+import software.bernie.geckolib.animatable.GeoEntity;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animation.AnimatableManager;
+import software.bernie.geckolib.animation.AnimationController;
+import software.bernie.geckolib.animation.PlayState;
+import software.bernie.geckolib.animation.RawAnimation;
+import software.bernie.geckolib.util.GeckoLibUtil;
 
-public class RainbowSkeletonEntity extends HostileEntity implements RangedAttackMob {
+public class RainbowSkeletonEntity extends HostileEntity implements GeoEntity {
+
+    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
     public RainbowSkeletonEntity(EntityType<? extends HostileEntity> entityType, World world) {
         super(entityType, world);
@@ -32,48 +33,79 @@ public class RainbowSkeletonEntity extends HostileEntity implements RangedAttack
 
     public static DefaultAttributeContainer.Builder createRainbowSkeletonAttributes() {
         return HostileEntity.createHostileAttributes()
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.35)
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 30.0)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 4.0)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 32.0);
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 20.0)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 3.0)
+                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 16.0);
     }
 
     public static boolean checkSpawnRules(EntityType<? extends RainbowSkeletonEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
-        return MobEntity.canMobSpawn(type, world, spawnReason, pos, random) &&
-                world.getLightLevel(pos) <= 7;
+        if (!MobEntity.canMobSpawn(type, world, spawnReason, pos, random)) {
+            return false;
+        }
+        int lightLevel = world.getLightLevel(pos);
+        boolean isCave = pos.getY() < 60 && world.getBlockState(pos.up()).isOpaque();
+        return lightLevel <= 7 && isCave;
     }
 
     @Override
     protected void initGoals() {
         this.goalSelector.add(1, new SwimGoal(this));
-        this.goalSelector.add(2, new FleeEntityGoal<>(this, WolfEntity.class, 6.0F, 1.0, 1.2));
-        this.goalSelector.add(3, new JumpAttackGoal(this));
-        this.goalSelector.add(4, new WanderAroundFarGoal(this, 1.0));
-        this.goalSelector.add(5, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
-        this.goalSelector.add(5, new LookAroundGoal(this));
+        this.goalSelector.add(2, new MeleeAttackGoal(this, 1.0, false));
+        this.goalSelector.add(3, new WanderAroundFarGoal(this, 1.0));
+        this.goalSelector.add(4, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
+        this.goalSelector.add(4, new LookAroundGoal(this));
 
         this.targetSelector.add(1, new RevengeGoal(this, RainbowSkeletonEntity.class));
         this.targetSelector.add(2, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
-        this.targetSelector.add(3, new ActiveTargetGoal<>(this, IronGolemEntity.class, true));
-        this.targetSelector.add(3, new ActiveTargetGoal<>(this, TurtleEntity.class, true));
     }
 
     @Override
     protected void initEquipment(Random random, LocalDifficulty localDifficulty) {
-        this.equipStack(net.minecraft.entity.EquipmentSlot.MAINHAND, Items.BOW.getDefaultStack());
     }
 
     @Override
-    public void shootAt(net.minecraft.entity.LivingEntity target, float pullProgress) {
-        ItemStack itemStack = this.getStackInHand(net.minecraft.util.Hand.MAIN_HAND);
-        ItemStack bowStack = this.getMainHandStack();
-        PersistentProjectileEntity persistentProjectileEntity = ProjectileUtil.createArrowProjectile(this, itemStack, pullProgress, bowStack);
-        double d = target.getX() - this.getX();
-        double e = target.getBodyY(0.3333333333333333) - persistentProjectileEntity.getY();
-        double f = target.getZ() - this.getZ();
-        double g = Math.sqrt(d * d + f * f);
-        persistentProjectileEntity.setVelocity(d, e + g * 0.20000000298023224, f, 1.6F, 14 - this.getWorld().getDifficulty().getId() * 4);
-        this.playSound(SoundEvents.ENTITY_SKELETON_SHOOT, 1.0F, 1.0F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
-        this.getWorld().spawnEntity(persistentProjectileEntity);
+    public boolean canEquip(net.minecraft.entity.EquipmentSlot slot) {
+        return false;
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+        if (!this.getWorld().isClient && this.isAlive()) {
+            if (this.getWorld().isDay() && this.burnsInDaylight()) {
+                BlockPos blockPos = this.getBlockPos();
+                if (this.getWorld().getBrightness(blockPos) > 0.5F && 
+                    this.getWorld().isSkyVisible(blockPos)) {
+                    this.setOnFireFor(8);
+                }
+            }
+        }
+    }
+
+    protected boolean burnsInDaylight() {
+        return true;
+    }
+
+    @Override
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
+        controllers.add(new AnimationController<>(this, "controller", 0, state -> {
+            if (state.isMoving()) {
+                return state.setAndContinue(RawAnimation.begin().thenLoop("animation.rainbowskeleton.walk"));
+            }
+            return state.setAndContinue(RawAnimation.begin().thenLoop("animation.rainbowskeleton.idle"));
+        }));
+        
+        controllers.add(new AnimationController<>(this, "attackController", 0, state -> {
+            if (this.handSwinging) {
+                return state.setAndContinue(RawAnimation.begin().thenPlay("animation.rainbowskeleton.attack"));
+            }
+            return PlayState.STOP;
+        }));
+    }
+
+    @Override
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return this.cache;
     }
 }
