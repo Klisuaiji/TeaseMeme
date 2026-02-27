@@ -4,6 +4,7 @@ import com.kulisaiji.teasememe.TeaseMemeMod;
 import com.kulisaiji.teasememe.features.rainbowskeleton.entity.RainbowSkeletonEntity;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.entity.SpawnLocationTypes;
@@ -26,6 +27,8 @@ public class ModEntities {
     );
 
     public static void register() {
+        FabricDefaultAttributeRegistry.register(RAINBOW_SKELETON, RainbowSkeletonEntity.createRainbowSkeletonAttributes());
+
         SpawnRestriction.register(
                 RAINBOW_SKELETON,
                 SpawnLocationTypes.ON_GROUND,
