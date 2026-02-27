@@ -17,6 +17,7 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
+import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 
@@ -55,12 +56,12 @@ public class RainbowSkeletonEntity extends AbstractSkeletonEntity {
     }
 
     @Override
-    protected SoundEvent getStepSound() {
+    SoundEvent getStepSound() {
         return SoundEvents.ENTITY_SKELETON_STEP;
     }
 
     @Override
-    protected void initEquipment(net.minecraft.resource.featuretoggle.FeatureSet enabledFeatures) {
+    protected void initEquipment(Random random, LocalDifficulty localDifficulty) {
         this.equipStack(net.minecraft.entity.EquipmentSlot.MAINHAND, Items.BOW.getDefaultStack());
     }
 }
