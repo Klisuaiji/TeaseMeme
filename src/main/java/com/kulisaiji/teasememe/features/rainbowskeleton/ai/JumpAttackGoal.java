@@ -1,8 +1,8 @@
 package com.kulisaiji.teasememe.features.rainbowskeleton.ai;
 
+import com.kulisaiji.teasememe.features.rainbowskeleton.entity.RainbowSkeletonEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
-import net.minecraft.entity.mob.AbstractSkeletonEntity;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
@@ -11,13 +11,13 @@ import net.minecraft.world.World;
 import java.util.EnumSet;
 
 public class JumpAttackGoal extends Goal {
-    private final AbstractSkeletonEntity skeleton;
+    private final RainbowSkeletonEntity skeleton;
     private LivingEntity target;
     private int cooldown = 0;
     private int jumpTicks = 0;
     private boolean isJumping = false;
 
-    public JumpAttackGoal(AbstractSkeletonEntity skeleton) {
+    public JumpAttackGoal(RainbowSkeletonEntity skeleton) {
         this.skeleton = skeleton;
         this.setControls(EnumSet.of(Control.MOVE, Control.LOOK));
     }
