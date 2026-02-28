@@ -23,7 +23,7 @@ public class ModEntities {
         ENTITY_TYPES.register("rainbowskeleton", () -> 
             EntityType.Builder.create(RainbowSkeletonEntity::new, SpawnGroup.MONSTER)
                 .dimensions(0.6F, 1.99F)
-                .build()
+                .build("rainbowskeleton")
         );
 
     public static void register() {

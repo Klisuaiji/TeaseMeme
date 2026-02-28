@@ -9,16 +9,16 @@ public class RainbowSkeletonModel extends GeoModel<RainbowSkeletonEntity> {
 
     @Override
     public ResourceLocation getModelResource(RainbowSkeletonEntity animatable) {
-        return ResourceLocation.fromNamespaceAndPath(TeaseMemeMod.MOD_ID, "geo/rainbowskeleton.geo.json");
+        return new ResourceLocation(TeaseMemeMod.MOD_ID, "geo/rainbowskeleton.geo.json");
     }
 
     @Override
     public ResourceLocation getTextureResource(RainbowSkeletonEntity animatable) {
-        return ResourceLocation.fromNamespaceAndPath(TeaseMemeMod.MOD_ID, "textures/entity/rainbowskeleton.png");
+        return new ResourceLocation(TeaseMemeMod.MOD_ID, "textures/entity/rainbowskeleton.png");
     }
 
     @Override
     public ResourceLocation getAnimationResource(RainbowSkeletonEntity animatable) {
-        return ResourceLocation.fromNamespaceAndPath(TeaseMemeMod.MOD_ID, "animations/rainbowskeleton.animation.json");
+        return new ResourceLocation(TeaseMemeMod.MOD_ID, "animations/rainbowskeleton.animation.json");
     }
 }
