@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "teasememe",
+  "version": "${version}",
+  "name": "抽象搞笑合集",
+  "description": "包含彩色骷髅等搞笑特性。彩色骷髅是一种特殊的骷髅变种，只在黑暗的洞穴中生成，拥有绚丽的彩虹外观。它会攻击玩家，但在阳光下会燃烧。",
+  "authors": [
+    "kulisaiji"
+  ],
+  "contact": {
+    "homepage": "https://example.com/",
+    "sources": "https://github.com/kulisaiji/teasememe"
+  },
+  "license": "MIT",
+  "icon": "assets/teasememe/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.kulisaiji.teasememe.TeaseMemeModFabric"
+    ],
+    "client": [
+      "com.kulisaiji.teasememe.TeaseMemeModFabricClient"
+    ]
+  },
+  "mixins": [
+    "teasememe.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.16.0",
+    "minecraft": "~1.21.1",
+    "java": ">=21",
+    "fabric-api": "*",
+    "geckolib": ">=4.5.5"
+  }
+}
