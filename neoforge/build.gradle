@@ -7,6 +7,10 @@ architectury {
     neoForge()
 }
 
+loom {
+    mappings loom.officialMojangMappings()
+}
+
 configurations {
     common {
         canBeResolved = true

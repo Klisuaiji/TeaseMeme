@@ -5,10 +5,7 @@ import com.kulisaiji.teasememe.features.rainbowskeleton.entity.RainbowSkeletonEn
 import com.kulisaiji.teasememe.features.rainbowskeleton.item.ModItems;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
-import net.minecraft.entity.SpawnLocationTypes;
-import net.minecraft.entity.SpawnRestriction;
 import net.minecraft.registry.Registries;
-import net.minecraft.world.Heightmap;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -24,13 +21,6 @@ public class ModEntities {
         );
 
     public static void register() {
-        SpawnRestriction.add(
-            RAINBOW_SKELETON.get(),
-            SpawnLocationTypes.ON_GROUND,
-            Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
-            RainbowSkeletonEntity::checkSpawnRules
-        );
-
         ModItems.register();
 
         TeaseMemeMod.LOGGER.info("彩色骷髅实体已注册!");
