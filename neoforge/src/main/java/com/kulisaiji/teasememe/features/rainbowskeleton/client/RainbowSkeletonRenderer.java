@@ -2,18 +2,16 @@ package com.kulisaiji.teasememe.features.rainbowskeleton.client;
 
 import com.kulisaiji.teasememe.TeaseMemeMod;
 import com.kulisaiji.teasememe.features.rainbowskeleton.entity.RainbowSkeletonEntity;
-import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.VertexConsumer;
-import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.render.entity.EntityRendererFactory;
-import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.layers.RenderLayer;
+import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
 public class RainbowSkeletonRenderer extends GeoEntityRenderer<RainbowSkeletonEntity> {
 
-    public RainbowSkeletonRenderer(EntityRendererFactory.Context renderManager) {
+    public RainbowSkeletonRenderer(EntityRendererProvider.Context renderManager) {
         super(renderManager, new RainbowSkeletonModel());
         this.shadowRadius = 0.5f;
     }
@@ -24,18 +22,8 @@ public class RainbowSkeletonRenderer extends GeoEntityRenderer<RainbowSkeletonEn
     }
 
     @Override
-    public RenderLayer getRenderType(RainbowSkeletonEntity animatable, ResourceLocation texture, VertexConsumerProvider bufferSource, float partialTick) {
+    public RenderLayer getRenderType(RainbowSkeletonEntity animatable, ResourceLocation texture, float partialTick) {
         return RenderLayer.getEntityTranslucentEmissive(texture);
-    }
-
-    @Override
-    public void preRender(MatrixStack poseStack, RainbowSkeletonEntity animatable, BakedGeoModel model, VertexConsumerProvider bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, int color) {
-        float time = (animatable.getWorld().getTime() + partialTick) / 20.0f;
-        float hue = (time * 0.5f) % 1.0f;
-        
-        int rainbowColor = hsbToRgb(hue, 1.0f, 1.0f);
-
-        super.preRender(poseStack, animatable, model, bufferSource, buffer, isReRender, partialTick, 0xF000F0, packedOverlay, rainbowColor);
     }
 
     private int hsbToRgb(float hue, float saturation, float brightness) {
