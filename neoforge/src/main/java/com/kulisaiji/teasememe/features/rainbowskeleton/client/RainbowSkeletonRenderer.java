@@ -2,10 +2,9 @@ package com.kulisaiji.teasememe.features.rainbowskeleton.client;
 
 import com.kulisaiji.teasememe.TeaseMemeMod;
 import com.kulisaiji.teasememe.features.rainbowskeleton.entity.RainbowSkeletonEntity;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
-import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
 public class RainbowSkeletonRenderer extends GeoEntityRenderer<RainbowSkeletonEntity> {
@@ -17,12 +16,11 @@ public class RainbowSkeletonRenderer extends GeoEntityRenderer<RainbowSkeletonEn
 
     @Override
     public ResourceLocation getTextureLocation(RainbowSkeletonEntity animatable) {
-        return new ResourceLocation(TeaseMemeMod.MOD_ID, "textures/entity/rainbowskeleton.png");
+        return ResourceLocation.fromNamespaceAndPath(TeaseMemeMod.MOD_ID, "textures/entity/rainbowskeleton.png");
     }
 
-    @Override
-    public RenderType getRenderType(RainbowSkeletonEntity animatable, ResourceLocation texture, float partialTick) {
-        return RenderType.entityTranslucentEmissive(texture);
+    public RenderLayer getRenderType(RainbowSkeletonEntity animatable, ResourceLocation texture, float partialTick) {
+        return RenderLayer.getEntityTranslucentEmissive(texture);
     }
 
     private int hsbToRgb(float hue, float saturation, float brightness) {
