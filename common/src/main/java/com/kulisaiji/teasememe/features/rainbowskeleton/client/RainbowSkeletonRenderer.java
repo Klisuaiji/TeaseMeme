@@ -7,7 +7,7 @@ import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.util.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
@@ -19,12 +19,12 @@ public class RainbowSkeletonRenderer extends GeoEntityRenderer<RainbowSkeletonEn
     }
 
     @Override
-    public Identifier getTextureLocation(RainbowSkeletonEntity animatable) {
-        return Identifier.of(TeaseMemeMod.MOD_ID, "textures/entity/rainbowskeleton.png");
+    public ResourceLocation getTextureLocation(RainbowSkeletonEntity animatable) {
+        return ResourceLocation.fromNamespaceAndPath(TeaseMemeMod.MOD_ID, "textures/entity/rainbowskeleton.png");
     }
 
     @Override
-    public RenderLayer getRenderType(RainbowSkeletonEntity animatable, Identifier texture, VertexConsumerProvider bufferSource, float partialTick) {
+    public RenderLayer getRenderType(RainbowSkeletonEntity animatable, ResourceLocation texture, VertexConsumerProvider bufferSource, float partialTick) {
         return RenderLayer.getEntityTranslucentEmissive(texture);
     }
 
