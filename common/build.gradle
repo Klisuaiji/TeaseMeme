@@ -7,5 +7,5 @@ dependencies {
 
     modImplementation "dev.architectury:architectury:$rootProject.architectury_api_version"
 
-    modImplementation "software.bernie.geckolib:geckolib-fabric-$rootProject.minecraft_version:$rootProject.geckolib_version"
+    modImplementation "software.bernie.geckolib:geckolib-fabric:$rootProject.geckolib_version"
 }
