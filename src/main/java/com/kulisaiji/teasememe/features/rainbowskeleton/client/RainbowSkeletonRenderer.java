@@ -30,14 +30,33 @@ public class RainbowSkeletonRenderer extends GeoEntityRenderer<RainbowSkeletonEn
 
     @Override
     public void preRender(MatrixStack poseStack, RainbowSkeletonEntity animatable, BakedGeoModel model, VertexConsumerProvider bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, int color) {
-        double x = animatable.getX();
         float time = (animatable.getWorld().getTime() + partialTick) / 20.0f;
-
-        float red = 0.5f + 0.5f * (float) Math.sin(x * 0.2 + time * 2);
-        float green = 0.5f + 0.5f * (float) Math.sin(x * 0.2 + time * 2 + 2);
-        float blue = 0.5f + 0.5f * (float) Math.sin(x * 0.2 + time * 2 + 4);
-        int rainbowColor = ((int)(0.7f * 255) << 24) | ((int)(red * 255) << 16) | ((int)(green * 255) << 8) | (int)(blue * 255);
+        float hue = (time * 0.5f) % 1.0f;
+        
+        int rainbowColor = hsbToRgb(hue, 1.0f, 1.0f);
 
         super.preRender(poseStack, animatable, model, bufferSource, buffer, isReRender, partialTick, 0xF000F0, packedOverlay, rainbowColor);
+    }
+
+    private int hsbToRgb(float hue, float saturation, float brightness) {
+        int r = 0, g = 0, b = 0;
+        if (saturation == 0) {
+            r = g = b = (int) (brightness * 255.0f + 0.5f);
+        } else {
+            float h = (hue - (float) Math.floor(hue)) * 6.0f;
+            float f = h - (float) Math.floor(h);
+            float p = brightness * (1.0f - saturation);
+            float q = brightness * (1.0f - saturation * f);
+            float t = brightness * (1.0f - saturation * (1.0f - f));
+            switch ((int) h) {
+                case 0 -> { r = (int) (brightness * 255.0f + 0.5f); g = (int) (t * 255.0f + 0.5f); b = (int) (p * 255.0f + 0.5f); }
+                case 1 -> { r = (int) (q * 255.0f + 0.5f); g = (int) (brightness * 255.0f + 0.5f); b = (int) (p * 255.0f + 0.5f); }
+                case 2 -> { r = (int) (p * 255.0f + 0.5f); g = (int) (brightness * 255.0f + 0.5f); b = (int) (t * 255.0f + 0.5f); }
+                case 3 -> { r = (int) (p * 255.0f + 0.5f); g = (int) (q * 255.0f + 0.5f); b = (int) (brightness * 255.0f + 0.5f); }
+                case 4 -> { r = (int) (t * 255.0f + 0.5f); g = (int) (p * 255.0f + 0.5f); b = (int) (brightness * 255.0f + 0.5f); }
+                case 5 -> { r = (int) (brightness * 255.0f + 0.5f); g = (int) (p * 255.0f + 0.5f); b = (int) (q * 255.0f + 0.5f); }
+            }
+        }
+        return 0xFF000000 | (r << 16) | (g << 8) | b;
     }
 }
