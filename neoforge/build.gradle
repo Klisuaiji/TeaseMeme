@@ -37,8 +37,7 @@ dependencies {
 
     implementation "software.bernie.geckolib:geckolib-neoforge-$rootProject.minecraft_version:$rootProject.geckolib_version"
 
-    common(project(path: ':common', configuration: 'dev')) { transitive = false }
-    common(project(path: ':common', configuration: 'compileClasspath')) { transitive = false }
+    common(project(path: ':common', configuration: 'namedElements')) { transitive = false }
     shadowBundle project(path: ':common', configuration: 'transformProductionNeoForge')
 }
 
