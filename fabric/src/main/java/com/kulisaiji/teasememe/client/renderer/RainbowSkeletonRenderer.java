@@ -11,7 +11,7 @@ import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import org.joml.Vector3f;
+import org.joml.Vector4f;
 
 public class RainbowSkeletonRenderer extends GeoEntityRenderer<RainbowSkeletonEntity> {
 
@@ -35,16 +35,16 @@ public class RainbowSkeletonRenderer extends GeoEntityRenderer<RainbowSkeletonEn
         float time = (animatable.level().getGameTime() + partialTick) / 20.0f;
         float hue = (time * 0.5f) % 1.0f;
 
-        Vector3f rgb = hsbToRgbVector(hue, 1.0f, 1.0f);
+        Vector4f rgba = hsbToRgba(hue, 0.8f, 1.0f, 0.6f);
         
-        this.renderColor.set(rgb.x, rgb.y, rgb.z, 1.0f);
+        this.renderColor.set(rgba.x, rgba.y, rgba.z, rgba.w);
 
         super.preRender(poseStack, animatable, model, buffer, isReRender, partialTick, 0xF000F0, packedOverlay, color);
     }
 
-    private Vector3f hsbToRgbVector(float hue, float saturation, float brightness) {
+    private Vector4f hsbToRgba(float hue, float saturation, float brightness, float alpha) {
         if (saturation == 0) {
-            return new Vector3f(brightness, brightness, brightness);
+            return new Vector4f(brightness, brightness, brightness, alpha);
         }
         
         float h = (hue - (float) Math.floor(hue)) * 6.0f;
@@ -54,12 +54,12 @@ public class RainbowSkeletonRenderer extends GeoEntityRenderer<RainbowSkeletonEn
         float t = brightness * (1.0f - saturation * (1.0f - f));
         
         return switch ((int) h) {
-            case 0 -> new Vector3f(brightness, t, p);
-            case 1 -> new Vector3f(q, brightness, p);
-            case 2 -> new Vector3f(p, brightness, t);
-            case 3 -> new Vector3f(p, q, brightness);
-            case 4 -> new Vector3f(t, p, brightness);
-            default -> new Vector3f(brightness, p, q);
+            case 0 -> new Vector4f(brightness, t, p, alpha);
+            case 1 -> new Vector4f(q, brightness, p, alpha);
+            case 2 -> new Vector4f(p, brightness, t, alpha);
+            case 3 -> new Vector4f(p, q, brightness, alpha);
+            case 4 -> new Vector4f(t, p, brightness, alpha);
+            default -> new Vector4f(brightness, p, q, alpha);
         };
     }
 }

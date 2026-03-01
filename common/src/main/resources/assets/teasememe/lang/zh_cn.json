@@ -1,8 +1,11 @@
 {
   "entity.teasememe.rainbowskeleton": "彩色骷髅",
   "item.teasememe.rainbowskeleton_spawn_egg": "彩色骷髅生成蛋",
+  "itemGroup.teasememe": "TeaseMeme",
   "itemGroup.teasememe.rainbowskeleton": "彩色骷髅",
   "teasememe.subtitle.entity.rainbowskeleton.ambient": "彩色骷髅: 嘎嘎",
   "teasememe.subtitle.entity.rainbowskeleton.hurt": "彩色骷髅: 受伤",
-  "teasememe.subtitle.entity.rainbowskeleton.death": "彩色骷髅: 死亡"
+  "teasememe.subtitle.entity.rainbowskeleton.death": "彩色骷髅: 死亡",
+  "effect.teasememe.rainbow_curse": "彩虹诅咒",
+  "teasememe.description.rainbowskeleton": "一种神秘的骷髅，散发着彩虹光芒。在洞穴中发现，它会用令人迷失的彩虹效果诅咒受害者。"
 }

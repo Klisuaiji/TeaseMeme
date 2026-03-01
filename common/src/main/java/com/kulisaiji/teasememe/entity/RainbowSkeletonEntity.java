@@ -3,14 +3,20 @@ package com.kulisaiji.teasememe.entity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import software.bernie.geckolib.animatable.GeoEntity;
@@ -65,6 +71,31 @@ public class RainbowSkeletonEntity extends Monster implements GeoEntity {
     @Override
     public boolean canPickUpLoot() {
         return false;
+    }
+
+    @Override
+    public boolean canHoldItem(ItemStack stack) {
+        return false;
+    }
+
+    @Override
+    public boolean canTakeItem(ItemStack stack) {
+        return false;
+    }
+
+    @Override
+    public void setItemSlot(EquipmentSlot slot, ItemStack stack) {
+    }
+
+    @Override
+    public boolean doHurtTarget(net.minecraft.world.entity.Entity target) {
+        boolean hurt = super.doHurtTarget(target);
+        if (hurt && target instanceof LivingEntity livingTarget) {
+            int duration = 100 + this.random.nextInt(60);
+            livingTarget.addEffect(new MobEffectInstance(MobEffects.CONFUSION, duration, 0));
+            livingTarget.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, duration, 1));
+        }
+        return hurt;
     }
 
     @Override

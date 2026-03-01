@@ -1,8 +1,11 @@
 {
   "entity.teasememe.rainbowskeleton": "Rainbow Skeleton",
   "item.teasememe.rainbowskeleton_spawn_egg": "Rainbow Skeleton Spawn Egg",
+  "itemGroup.teasememe": "TeaseMeme",
   "itemGroup.teasememe.rainbowskeleton": "Rainbow Skeleton",
   "teasememe.subtitle.entity.rainbowskeleton.ambient": "Rainbow Skeleton rattles",
   "teasememe.subtitle.entity.rainbowskeleton.hurt": "Rainbow Skeleton hurts",
-  "teasememe.subtitle.entity.rainbowskeleton.death": "Rainbow Skeleton dies"
+  "teasememe.subtitle.entity.rainbowskeleton.death": "Rainbow Skeleton dies",
+  "effect.teasememe.rainbow_curse": "Rainbow Curse",
+  "teasememe.description.rainbowskeleton": "A mysterious skeleton that glows with rainbow colors. Found in caves, it curses its victims with a disorienting rainbow effect."
 }

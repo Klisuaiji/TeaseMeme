@@ -1,36 +1,35 @@
-# 梗蛊不变
+# TeaseMeme
 
-#### Description
-{**When you're done, you can delete the content in this README and update the file with details for others getting started with your repository**}
+A multi-platform Minecraft mod featuring the mysterious Rainbow Skeleton.
 
-#### Software Architecture
-Software architecture description
+## Description
 
-#### Installation
+TeaseMeme adds a unique creature called the Rainbow Skeleton to Minecraft. This mysterious mob lurks in caves and emits a mesmerizing rainbow glow.
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+## Features
 
-#### Instructions
+- **Rainbow Skeleton**: A cave-dwelling hostile mob with rainbow effects
+- **Rainbow Curse**: Applies debuffs to players on attack
+- **Visual Effects**: Semi-transparent with self-illumination
+- **Multi-platform**: Supports both Fabric and NeoForge
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+## Installation
 
-#### Contribution
+1. Install Minecraft 1.21.1
+2. Install the required dependencies for your platform
+3. Place the mod jar in the mods folder
 
-1.  Fork the repository
-2.  Create Feat_xxx branch
-3.  Commit your code
-4.  Create Pull Request
+### Fabric Requirements
+- Fabric Loader 0.16.0+
+- Fabric API
+- Architectury API 13.0.0+
+- GeckoLib 4.7.0+
 
+### NeoForge Requirements
+- NeoForge 21.1+
+- Architectury API 13.0.0+
+- GeckoLib 4.7.0+
 
-#### Gitee Feature
+## License
 
-1.  You can use Readme\_XXX.md to support different languages, such as Readme\_en.md, Readme\_zh.md
-2.  Gitee blog [blog.gitee.com](https://blog.gitee.com)
-3.  Explore open source project [https://gitee.com/explore](https://gitee.com/explore)
-4.  The most valuable open source project [GVP](https://gitee.com/gvp)
-5.  The manual of Gitee [https://gitee.com/help](https://gitee.com/help)
-6.  The most popular members  [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+MIT License
