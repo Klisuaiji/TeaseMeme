@@ -1,6 +1,6 @@
 package com.kulisaiji.teasememe;
 
-import com.kulisaiji.teasememe.TeaseMemeMod;
+import com.kulisaiji.teasememe.registry.ModEntities;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
@@ -10,6 +10,9 @@ import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 public class TeaseMemeModNeoForge {
     public TeaseMemeModNeoForge(IEventBus modEventBus, Dist dist) {
         modEventBus.addListener(this::commonSetup);
+        
+        ModEntities.register(modEventBus);
+        
         TeaseMemeMod.init();
     }
 

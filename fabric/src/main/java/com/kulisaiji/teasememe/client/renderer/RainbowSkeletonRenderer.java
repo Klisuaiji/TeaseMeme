@@ -5,15 +5,15 @@ import com.kulisaiji.teasememe.client.model.RainbowSkeletonModel;
 import com.kulisaiji.teasememe.entity.RainbowSkeletonEntity;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import org.joml.Vector3f;
 
- public class RainbowSkeletonRenderer extends GeoEntityRenderer<RainbowSkeletonEntity> {
+public class RainbowSkeletonRenderer extends GeoEntityRenderer<RainbowSkeletonEntity> {
 
     public RainbowSkeletonRenderer(EntityRendererProvider.Context renderManager) {
         super(renderManager, new RainbowSkeletonModel());
@@ -35,54 +35,31 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
         float time = (animatable.level().getGameTime() + partialTick) / 20.0f;
         float hue = (time * 0.5f) % 1.0f;
 
-        int rainbowColor = hsbToRgb(hue, 1.0f, 1.0f);
+        Vector3f rgb = hsbToRgbVector(hue, 1.0f, 1.0f);
+        
+        this.renderColor.set(rgb.x, rgb.y, rgb.z, 1.0f);
 
-        super.preRender(poseStack, animatable, model, buffer, isReRender, partialTick, 0xF000F0, packedOverlay, rainbowColor);
+        super.preRender(poseStack, animatable, model, buffer, isReRender, partialTick, 0xF000F0, packedOverlay, color);
     }
 
-    private int hsbToRgb(float hue, float saturation, float brightness) {
-        int r = 0, g = 0, b = 0;
+    private Vector3f hsbToRgbVector(float hue, float saturation, float brightness) {
         if (saturation == 0) {
-            r = g = b = (int) (brightness * 255.0f + 0.5f);
-        } else {
-            float h = (hue - (float) Math.floor(hue)) * 6.0f;
-            float f = h - (float) Math.floor(h);
-            float p = brightness * (1.0f - saturation);
-            float q = brightness * (1.0f - saturation * f);
-            float t = brightness * (1.0f - saturation * (1.0f - f));
-            switch ((int) h) {
-                case 0 -> {
-                    r = (int) (brightness * 255.0f + 0.5f);
-                    g = (int) (t * 255.0f + 0.5f);
-                    b = (int) (p * 255.0f + 0.5f);
-                }
-                case 1 -> {
-                    r = (int) (q * 255.0f + 0.5f);
-                    g = (int) (brightness * 255.0f + 0.5f);
-                    b = (int) (p * 255.0f + 0.5f);
-                }
-                case 2 -> {
-                    r = (int) (p * 255.0f + 0.5f);
-                    g = (int) (brightness * 255.0f + 0.5f);
-                    b = (int) (t * 255.0f + 0.5f);
-                }
-                case 3 -> {
-                    r = (int) (p * 255.0f + 0.5f);
-                    g = (int) (q * 255.0f + 0.5f);
-                    b = (int) (brightness * 255.0f + 0.5f);
-                }
-                case 4 -> {
-                    r = (int) (t * 255.0f + 0.5f);
-                    g = (int) (p * 255.0f + 0.5f);
-                    b = (int) (brightness * 255.0f + 0.5f);
-                }
-                case 5 -> {
-                    r = (int) (brightness * 255.0f + 0.5f);
-                    g = (int) (p * 255.0f + 0.5f);
-                    b = (int) (q * 255.0f + 0.5f);
-                }
-            }
+            return new Vector3f(brightness, brightness, brightness);
         }
-        return 0xFF000000 | (r << 16) | (g << 8) | b;
+        
+        float h = (hue - (float) Math.floor(hue)) * 6.0f;
+        float f = h - (float) Math.floor(h);
+        float p = brightness * (1.0f - saturation);
+        float q = brightness * (1.0f - saturation * f);
+        float t = brightness * (1.0f - saturation * (1.0f - f));
+        
+        return switch ((int) h) {
+            case 0 -> new Vector3f(brightness, t, p);
+            case 1 -> new Vector3f(q, brightness, p);
+            case 2 -> new Vector3f(p, brightness, t);
+            case 3 -> new Vector3f(p, q, brightness);
+            case 4 -> new Vector3f(t, p, brightness);
+            default -> new Vector3f(brightness, p, q);
+        };
     }
 }
