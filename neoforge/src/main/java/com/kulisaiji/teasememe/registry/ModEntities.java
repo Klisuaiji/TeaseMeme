@@ -20,7 +20,6 @@ public class ModEntities {
     
     public static final DeferredHolder<EntityType<?>, EntityType<RainbowSkeletonEntity>> RAINBOW_SKELETON = 
             ENTITIES.register("rainbowskeleton", () -> EntityType.Builder.of(RainbowSkeletonEntity::new, MobCategory.MONSTER)
-                    .dimensions(0.6F, 1.99F)
                     .build());
     
     public static final DeferredHolder<Item, SpawnEggItem> RAINBOW_SKELETON_SPAWN_EGG = 

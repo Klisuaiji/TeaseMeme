@@ -10,12 +10,9 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
-import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SpawnEggItem;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.MobSpawnSettings;
-import net.minecraft.world.level.levelgen.Heightmap;
 
 public class ModEntities {
 
@@ -23,7 +20,6 @@ public class ModEntities {
             BuiltInRegistries.ENTITY_TYPE,
             ResourceLocation.fromNamespaceAndPath(TeaseMemeMod.MOD_ID, "rainbowskeleton"),
             EntityType.Builder.of(RainbowSkeletonEntity::new, MobCategory.MONSTER)
-                    .dimensions(0.6F, 1.99F)
                     .build()
     );
 
@@ -40,13 +36,6 @@ public class ModEntities {
 
     public static void register() {
         FabricDefaultAttributeRegistry.register(RAINBOW_SKELETON, RainbowSkeletonEntity.createAttributes());
-
-        SpawnPlacements.register(
-                RAINBOW_SKELETON,
-                SpawnPlacements.Location.ON_GROUND,
-                Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
-                RainbowSkeletonEntity::checkSpawnRules
-        );
 
         BiomeModifications.addSpawn(
                 BiomeSelectors.foundInOverworld(),
