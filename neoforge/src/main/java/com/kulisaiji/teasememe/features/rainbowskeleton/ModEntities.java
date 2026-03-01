@@ -5,13 +5,13 @@ import com.kulisaiji.teasememe.features.rainbowskeleton.entity.RainbowSkeletonEn
 import com.kulisaiji.teasememe.features.rainbowskeleton.item.ModItems;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
-import net.minecraft.registry.Registries;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
 public class ModEntities {
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = 
-        DeferredRegister.create(Registries.ENTITY_TYPE, TeaseMemeMod.MOD_ID);
+        DeferredRegister.create(NeoForgeRegistries.Keys.ENTITY_TYPES, TeaseMemeMod.MOD_ID);
 
     public static final DeferredHolder<EntityType<?>, EntityType<RainbowSkeletonEntity>> RAINBOW_SKELETON = 
         ENTITY_TYPES.register("rainbowskeleton", () -> 

@@ -1,16 +1,13 @@
 package com.kulisaiji.teasememe;
 
 import com.kulisaiji.teasememe.features.rainbowskeleton.ModEntities;
-import net.minecraft.entity.SpawnLocationTypes;
-import net.minecraft.entity.SpawnRestriction;
-import net.minecraft.world.Heightmap;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.event.RegisterSpawnPlacementsEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeModificationEvent;
+import net.neoforged.neoforge.event.entity.SpawnPlacementRegisterEvent;
 
 @Mod(TeaseMemeMod.MOD_ID)
 public class TeaseMemeModNeoForge {
@@ -36,20 +33,20 @@ public class TeaseMemeModNeoForge {
 
     private void onEntityAttributeModification(final EntityAttributeModificationEvent event) {
         event.add(ModEntities.RAINBOW_SKELETON.get(), 
-            net.minecraft.entity.attribute.EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25);
+            net.neoforged.neoforge.entity.attributes.BaseAttributes.GENERIC_MOVEMENT_SPEED, 0.25);
         event.add(ModEntities.RAINBOW_SKELETON.get(), 
-            net.minecraft.entity.attribute.EntityAttributes.GENERIC_MAX_HEALTH, 20.0);
+            net.neoforged.neoforge.entity.attributes.BaseAttributes.GENERIC_MAX_HEALTH, 20.0);
         event.add(ModEntities.RAINBOW_SKELETON.get(), 
-            net.minecraft.entity.attribute.EntityAttributes.GENERIC_ATTACK_DAMAGE, 3.0);
+            net.neoforged.neoforge.entity.attributes.BaseAttributes.GENERIC_ATTACK_DAMAGE, 3.0);
         event.add(ModEntities.RAINBOW_SKELETON.get(), 
-            net.minecraft.entity.attribute.EntityAttributes.GENERIC_FOLLOW_RANGE, 16.0);
+            net.neoforged.neoforge.entity.attributes.BaseAttributes.GENERIC_FOLLOW_RANGE, 16.0);
     }
 
-    private void onRegisterSpawnPlacements(final RegisterSpawnPlacementsEvent event) {
+    private void onRegisterSpawnPlacements(final SpawnPlacementRegisterEvent event) {
         event.register(
             ModEntities.RAINBOW_SKELETON.get(),
-            SpawnLocationTypes.ON_GROUND,
-            Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
+            net.neoforged.neoforge.entity.SpawnPlacementTypes.ON_GROUND,
+            net.minecraft.world.Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
             com.kulisaiji.teasememe.features.rainbowskeleton.entity.RainbowSkeletonEntity::checkSpawnRules
         );
     }

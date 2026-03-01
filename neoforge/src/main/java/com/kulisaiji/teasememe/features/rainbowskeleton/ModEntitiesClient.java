@@ -4,13 +4,14 @@ import com.kulisaiji.teasememe.features.rainbowskeleton.client.RainbowSkeletonRe
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 
 public class ModEntitiesClient {
 
     @OnlyIn(Dist.CLIENT)
     public static void registerClient(final FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
-            net.minecraft.client.render.entity.EntityRenderers.register(
+            EntityRenderers.register(
                 ModEntities.RAINBOW_SKELETON.get(), 
                 RainbowSkeletonRenderer::new
             );
