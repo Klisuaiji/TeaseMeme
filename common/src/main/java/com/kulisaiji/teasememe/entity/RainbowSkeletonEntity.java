@@ -5,11 +5,13 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
@@ -30,6 +32,8 @@ import software.bernie.geckolib.animation.RawAnimation;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 public class RainbowSkeletonEntity extends Monster implements GeoEntity {
+
+    private static final EntityDimensions DIMENSIONS = EntityDimensions.scalable(0.6F, 1.99F);
 
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
@@ -116,6 +120,11 @@ public class RainbowSkeletonEntity extends Monster implements GeoEntity {
 
     protected boolean shouldBurnInDay() {
         return true;
+    }
+
+    @Override
+    public EntityDimensions getDimensions(Pose pose) {
+        return DIMENSIONS;
     }
 
     @Override
