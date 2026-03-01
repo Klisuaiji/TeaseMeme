@@ -3,7 +3,6 @@ package com.kulisaiji.teasememe.registry;
 import com.kulisaiji.teasememe.TeaseMemeMod;
 import com.kulisaiji.teasememe.entity.RainbowSkeletonEntity;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.item.Item;
@@ -21,7 +20,7 @@ public class ModEntities {
     
     public static final DeferredHolder<EntityType<?>, EntityType<RainbowSkeletonEntity>> RAINBOW_SKELETON = 
             ENTITIES.register("rainbowskeleton", () -> EntityType.Builder.of(RainbowSkeletonEntity::new, MobCategory.MONSTER)
-                    .dimensions(EntityDimensions.scalable(0.6F, 1.99F))
+                    .size(0.6F, 1.99F)
                     .build());
     
     public static final DeferredHolder<Item, SpawnEggItem> RAINBOW_SKELETON_SPAWN_EGG = 
