@@ -23,6 +23,6 @@ public class ModEntities {
     public static void register() {
         ModItems.register();
 
-        TeaseMemeMod.LOGGER.info("彩色骷髅实体已注册!");
+        TeaseMemeMod.LOGGER.info("彩虹骷髅实体已注册 (NeoForge)!");
     }
 }

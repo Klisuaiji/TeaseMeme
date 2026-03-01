@@ -1,6 +1,7 @@
 package com.kulisaiji.teasememe;
 
 import com.kulisaiji.teasememe.features.rainbowskeleton.ModEntities;
+import net.minecraft.world.Heightmap;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
@@ -33,20 +34,20 @@ public class TeaseMemeModNeoForge {
 
     private void onEntityAttributeModification(final EntityAttributeModificationEvent event) {
         event.add(ModEntities.RAINBOW_SKELETON.get(), 
-            net.neoforged.neoforge.entity.attributes.BaseAttributes.GENERIC_MOVEMENT_SPEED, 0.25);
+            net.minecraft.entity.attribute.EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25);
         event.add(ModEntities.RAINBOW_SKELETON.get(), 
-            net.neoforged.neoforge.entity.attributes.BaseAttributes.GENERIC_MAX_HEALTH, 20.0);
+            net.minecraft.entity.attribute.EntityAttributes.GENERIC_MAX_HEALTH, 20.0);
         event.add(ModEntities.RAINBOW_SKELETON.get(), 
-            net.neoforged.neoforge.entity.attributes.BaseAttributes.GENERIC_ATTACK_DAMAGE, 3.0);
+            net.minecraft.entity.attribute.EntityAttributes.GENERIC_ATTACK_DAMAGE, 3.0);
         event.add(ModEntities.RAINBOW_SKELETON.get(), 
-            net.neoforged.neoforge.entity.attributes.BaseAttributes.GENERIC_FOLLOW_RANGE, 16.0);
+            net.minecraft.entity.attribute.EntityAttributes.GENERIC_FOLLOW_RANGE, 16.0);
     }
 
     private void onRegisterSpawnPlacements(final SpawnPlacementRegisterEvent event) {
         event.register(
             ModEntities.RAINBOW_SKELETON.get(),
             net.neoforged.neoforge.entity.SpawnPlacementTypes.ON_GROUND,
-            net.minecraft.world.Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
+            Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
             com.kulisaiji.teasememe.features.rainbowskeleton.entity.RainbowSkeletonEntity::checkSpawnRules
         );
     }

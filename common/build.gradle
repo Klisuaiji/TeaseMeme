@@ -4,6 +4,4 @@ architectury {
 
 dependencies {
     implementation "dev.architectury:architectury:$rootProject.architectury_api_version"
-
-    implementation "software.bernie.geckolib:geckolib-common-1.21.1:$rootProject.geckolib_version"
 }

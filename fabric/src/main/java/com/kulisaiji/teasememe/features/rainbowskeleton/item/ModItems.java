@@ -11,23 +11,16 @@ import net.minecraft.util.Identifier;
 
 public class ModItems {
 
-    public static final Item RAINBOW_SKELETON_SPAWN_EGG = registerSpawnEgg(
-            "rainbowskeleton_spawn_egg",
-            ModEntities.RAINBOW_SKELETON,
-            0xFF0000,
-            0x00FF00
+    public static final Item RAINBOW_SKELETON_SPAWN_EGG = Registry.register(
+            Registries.ITEM,
+            Identifier.of("teasememe", "rainbowskeleton_spawn_egg"),
+            new SpawnEggItem(
+                    ModEntities.RAINBOW_SKELETON,
+                    0xFF0000,
+                    0x00FF00,
+                    new Item.Settings()
+            )
     );
-
-    @SuppressWarnings("unchecked")
-    private static Item registerSpawnEgg(String name, EntityType<? extends MobEntity> entityType, int primaryColor, int secondaryColor) {
-        SpawnEggItem spawnEggItem = new SpawnEggItem(
-                entityType,
-                primaryColor,
-                secondaryColor,
-                new Item.Settings()
-        );
-        return Registry.register(Registries.ITEM, Identifier.of("teasememe", name), spawnEggItem);
-    }
 
     public static void register() {
     }
