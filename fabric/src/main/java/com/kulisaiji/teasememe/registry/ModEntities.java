@@ -8,6 +8,7 @@ import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRe
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.SpawnPlacements;
@@ -23,7 +24,7 @@ public class ModEntities {
             BuiltInRegistries.ENTITY_TYPE,
             ResourceLocation.fromNamespaceAndPath(TeaseMemeMod.MOD_ID, "rainbowskeleton"),
             EntityType.Builder.of(RainbowSkeletonEntity::new, MobCategory.MONSTER)
-                    .dimensions(0.6F, 1.99F)
+                    .dimensions(EntityDimensions.scalable(0.6F, 1.99F))
                     .build()
     );
 
@@ -43,7 +44,7 @@ public class ModEntities {
 
         SpawnPlacements.register(
                 RAINBOW_SKELETON,
-                SpawnPlacements.Type.ON_GROUND,
+                SpawnPlacements.Location.ON_GROUND,
                 Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                 RainbowSkeletonEntity::checkSpawnRules
         );

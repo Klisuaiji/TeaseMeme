@@ -5,6 +5,7 @@ import com.kulisaiji.teasememe.client.model.RainbowSkeletonModel;
 import com.kulisaiji.teasememe.entity.RainbowSkeletonEntity;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
@@ -26,20 +27,20 @@ public class RainbowSkeletonRenderer extends GeoEntityRenderer<RainbowSkeletonEn
     }
 
     @Override
-    public RenderType getRenderType(RainbowSkeletonEntity animatable, ResourceLocation texture) {
+    public RenderType getRenderType(RainbowSkeletonEntity animatable, ResourceLocation texture, MultiBufferSource bufferSource, float partialTick) {
         return RenderType.entityTranslucentEmissive(texture);
     }
 
     @Override
-    public void preRender(PoseStack poseStack, RainbowSkeletonEntity animatable, BakedGeoModel model, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, int color) {
+    public void preRender(PoseStack poseStack, RainbowSkeletonEntity animatable, BakedGeoModel model, MultiBufferSource bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, int color) {
         float time = (animatable.level().getGameTime() + partialTick) / 20.0f;
         float hue = (time * 0.5f) % 1.0f;
 
         Vector4f rgba = hsbToRgba(hue, 0.8f, 1.0f, 0.6f);
         
-        this.renderColor.set(rgba.x, rgba.y, rgba.z, rgba.w);
-
-        super.preRender(poseStack, animatable, model, buffer, isReRender, partialTick, 0xF000F0, packedOverlay, color);
+        super.preRender(poseStack, animatable, model, bufferSource, buffer, isReRender, partialTick, 0xF000F0, packedOverlay, color);
+        
+        this.setRenderColor(rgba.x, rgba.y, rgba.z, rgba.w);
     }
 
     private Vector4f hsbToRgba(float hue, float saturation, float brightness, float alpha) {

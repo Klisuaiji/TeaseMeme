@@ -13,7 +13,7 @@ public class RainbowCurseEffect extends MobEffect {
         this.addAttributeModifier(Attributes.MOVEMENT_SPEED, 
                 "7107DE5E-7CE8-4030-940E-514C1F160890", 
                 -0.15, 
-                AttributeModifier.Operation.MULTIPLY_TOTAL);
+                AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
     }
     
     @Override
