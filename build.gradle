@@ -1,5 +1,5 @@
 plugins {
-    id 'dev.architectury.loom' version '1.11-SNAPSHOT' apply false
+    id 'dev.architectury.loom' version '1.9-SNAPSHOT' apply false
     id 'architectury-plugin' version '3.4-SNAPSHOT' apply false
     id 'com.gradleup.shadow' version '8.3.6' apply false
 }
@@ -26,19 +26,22 @@ subprojects {
         maven {
             name = 'GeckoLib'
             url = 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
+            content {
+                includeGroup("software.bernie.geckolib")
+            }
+        }
+        maven {
+            name = 'Architectury'
+            url = 'https://maven.architectury.dev/'
+            content {
+                includeGroup("dev.architectury")
+            }
         }
     }
 
     dependencies {
         minecraft "net.minecraft:minecraft:$rootProject.minecraft_version"
-        if (project.name == 'neoforge') {
-            mappings loom.officialMojangMappings()
-        } else {
-            mappings loom.layered {
-                it.mappings("net.fabricmc:yarn:$rootProject.yarn_mappings:v2")
-                it.mappings("dev.architectury:yarn-mappings-patch-neoforge:$rootProject.yarn_mappings_patch_neoforge_version")
-            }
-        }
+        mappings loom.officialMojangMappings()
     }
 
     java {

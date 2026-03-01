@@ -6,17 +6,14 @@ issueTrackerURL = "https://github.com/kulisaiji/teasememe/issues"
 [[mods]]
 modId = "teasememe"
 version = "${version}"
-displayName = "抽象搞笑合集"
+displayName = "TeaseMeme"
 authors = "kulisaiji"
 description = '''
-包含彩色骷髅等搞笑特性。彩色骷髅是一种特殊的骷髅变种，只在黑暗的洞穴中生成，拥有绚丽的彩虹外观。它会攻击玩家，但在阳光下会燃烧。
+A multi-platform Minecraft mod with custom entities and features.
 '''
 
 [[mixins]]
 config = "teasememe.mixins.json"
-
-[[accessTransformers]]
-file = "META-INF/accesstransformer.cfg"
 
 [[dependencies.teasememe]]
 modId = "neoforge"
@@ -33,8 +30,15 @@ ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.teasememe]]
+modId = "architectury"
+type = "required"
+versionRange = "[13.0.0,)"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.teasememe]]
 modId = "geckolib"
 type = "required"
-versionRange = "[4.5.5,)"
-ordering = "NONE"
+versionRange = "[4.7.0,)"
+ordering = "AFTER"
 side = "BOTH"

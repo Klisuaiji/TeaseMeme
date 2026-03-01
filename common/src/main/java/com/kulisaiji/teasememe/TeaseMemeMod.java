@@ -8,6 +8,6 @@ public class TeaseMemeMod {
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
     public static void init() {
-        LOGGER.info("抽象搞笑合集模组加载！ (彩虹骷髅已激活)");
+        LOGGER.info("TeaseMeme mod initializing...");
     }
 }

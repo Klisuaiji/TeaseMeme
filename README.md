@@ -1,52 +1,47 @@
+# TeaseMeme
 
+A multi-platform Minecraft mod built with Architectury, supporting both Fabric and NeoForge.
 
-# 梗蛊不变
+## Features
 
-#### 介绍
+- Multi-platform support (Fabric & NeoForge)
+- Built with Architectury API for cross-platform compatibility
+- GeckoLib integration for custom entity animations
 
-梗蛊不变 是一个基于 Fabric 的 Minecraft 模组，添加了一个独特的彩虹骷髅（Rainbow Skeleton）生物。这个模组为游戏世界引入了新的挑战——拥有彩虹外观和特殊攻击能力的骷髅敌人。
+## Requirements
 
-#### 软件架构
+- Minecraft 1.21.1
+- Java 21+
 
-- **核心框架**: Fabric (Minecraft 1.20+ 模组加载器)
-- **实体系统**: 自定义 HostileEntity
-- **动画系统**: Geckolib 4.0
-- **AI 行为**: 自定义 Goal 攻击模式
-- **客户端渲染**: GeoRenderer + 自定义模型
+### Fabric
+- Fabric Loader 0.16.0+
+- Fabric API
+- Architectury API 13.0.0+
+- GeckoLib 4.7.0+
 
-#### 功能特性
+### NeoForge
+- NeoForge 21.1+
+- Architectury API 13.0.0+
+- GeckoLib 4.7.0+
 
-- 🌈 **彩虹骷髅** - 拥有彩虹渐变外观的骷髅生物
-- ⚔️ **跳跃攻击** - 独特的跳跃攻击 AI 行为
-- 📦 **刷怪蛋** - 可用于生成彩虹骷髅的刷怪蛋
-- 🌞 **日光燃烧** - 白天会自动燃烧（类似普通骷髅）
+## Building
 
-#### 安装教程
+```bash
+./gradlew build
+```
 
-1. 确保已安装 Fabric Loader 和 Fabric API
-2. 下载对应版本的模组 JAR 文件
-3. 将模组放入 `.minecraft/mods` 文件夹
-4. 启动游戏即可
+Build outputs will be in:
+- `fabric/build/libs/` - Fabric mod jar
+- `neoforge/build/libs/` - NeoForge mod jar
 
-#### 使用说明
+## Development
 
-1. 在游戏中使用彩虹骷髅刷怪蛋生成该生物
-2. 彩虹骷髅会自动寻找玩家并发起跳跃攻击
-3. 击败后可获得战利品
+This project uses the Architectury toolchain for multi-platform mod development:
 
-#### 模组信息
+- `common/` - Shared code between platforms
+- `fabric/` - Fabric-specific code
+- `neoforge/` - NeoForge-specific code
 
-- **作者**: kulisaiji_owo
-- **版本**: 1.0.0
-- **适用游戏版本**: Minecraft 1.20+
+## License
 
-#### 参与贡献
-
-1. Fork 本仓库
-2. 新建 Feat_xxx 分支
-3. 提交代码
-4. 新建 Pull Request
-
-#### 许可证
-
-本项目遵循 MIT 许可证。
+MIT License

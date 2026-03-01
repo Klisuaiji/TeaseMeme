@@ -23,18 +23,15 @@ configurations {
 }
 
 repositories {
-    maven { url = 'https://maven.neoforged.net/releases' }
     maven {
-        name = 'GeckoLib'
-        url = 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
+        name = 'NeoForge'
+        url = 'https://maven.neoforged.net/releases'
     }
 }
 
 dependencies {
     neoForge "net.neoforged:neoforge:$rootProject.neoforge_version"
-
     modImplementation "dev.architectury:architectury-neoforge:$rootProject.architectury_api_version"
-
     implementation "software.bernie.geckolib:geckolib-neoforge-$rootProject.minecraft_version:$rootProject.geckolib_version"
 
     common(project(path: ':common', configuration: 'namedElements')) { transitive = false }
