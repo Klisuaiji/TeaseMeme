@@ -2,11 +2,11 @@ package com.kulisaiji.teasememe.registry;
 
 import com.kulisaiji.teasememe.TeaseMemeMod;
 import com.kulisaiji.teasememe.entity.RainbowSkeletonEntity;
+import com.kulisaiji.teasememe.item.RainbowSkeletonSpawnEggItem;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.SpawnEggItem;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -23,11 +23,9 @@ public class ModEntities {
                     .sized(0.6F, 1.99F)
                     .build(TeaseMemeMod.MOD_ID + ":rainbowskeleton"));
     
-    public static final DeferredHolder<Item, SpawnEggItem> RAINBOW_SKELETON_SPAWN_EGG = 
-            ITEMS.register("rainbowskeleton_spawn_egg", () -> new SpawnEggItem(
+    public static final DeferredHolder<Item, Item> RAINBOW_SKELETON_SPAWN_EGG = 
+            ITEMS.register("rainbowskeleton_spawn_egg", () -> new RainbowSkeletonSpawnEggItem(
                     RAINBOW_SKELETON.get(),
-                    0xFF0000,
-                    0x00FF00,
                     new Item.Properties()
             ));
     

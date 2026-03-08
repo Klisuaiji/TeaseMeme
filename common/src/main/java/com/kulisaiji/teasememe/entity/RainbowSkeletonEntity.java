@@ -50,8 +50,8 @@ public class RainbowSkeletonEntity extends Monster implements GeoEntity {
             return false;
         }
         int lightLevel = level.getMaxLocalRawBrightness(pos);
-        boolean isCave = pos.getY() < 60 && level.getBlockState(pos.above()).isSolid();
-        return lightLevel <= 7 && isCave;
+        boolean isDark = lightLevel <= 7;
+        return isDark;
     }
 
     @Override

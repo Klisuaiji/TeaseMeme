@@ -28,7 +28,7 @@ public class RainbowSkeletonRenderer extends GeoEntityRenderer<RainbowSkeletonEn
 
     @Override
     public RenderType getRenderType(RainbowSkeletonEntity animatable, ResourceLocation texture, MultiBufferSource bufferSource, float partialTick) {
-        return RenderType.entityTranslucentEmissive(texture);
+        return RenderType.entityTranslucent(texture);
     }
 
     @Override
