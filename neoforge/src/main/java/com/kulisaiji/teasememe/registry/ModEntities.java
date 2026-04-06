@@ -8,6 +8,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -21,7 +22,6 @@ public class ModEntities {
     public static final DeferredHolder<EntityType<?>, EntityType<RainbowSkeletonEntity>> RAINBOW_SKELETON = 
             ENTITIES.register("rainbowskeleton", () -> EntityType.Builder.of(RainbowSkeletonEntity::new, MobCategory.MONSTER)
                     .sized(0.6F, 1.99F)
-                    .setAttributes(RainbowSkeletonEntity::createAttributes)
                     .build(TeaseMemeMod.MOD_ID + ":rainbowskeleton"));
     
     public static final DeferredHolder<Item, Item> RAINBOW_SKELETON_SPAWN_EGG = 
@@ -33,6 +33,11 @@ public class ModEntities {
     public static void register(IEventBus modEventBus) {
         ENTITIES.register(modEventBus);
         ITEMS.register(modEventBus);
+        modEventBus.addListener(ModEntities::onEntityAttributeCreation);
         TeaseMemeMod.LOGGER.info("Rainbow Skeleton entity registered (NeoForge)!");
+    }
+    
+    public static void onEntityAttributeCreation(EntityAttributeCreationEvent event) {
+        event.put(RAINBOW_SKELETON.get(), RainbowSkeletonEntity.createAttributes().build());
     }
 }
