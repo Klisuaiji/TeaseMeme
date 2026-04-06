@@ -3,9 +3,9 @@ package com.kulisaiji.teasememe.client.renderer;
 import com.kulisaiji.teasememe.TeaseMemeMod;
 import com.kulisaiji.teasememe.client.model.RainbowSkeletonModel;
 import com.kulisaiji.teasememe.entity.RainbowSkeletonEntity;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
@@ -16,6 +16,8 @@ import org.joml.Vector4f;
 
 public class RainbowSkeletonRenderer extends GeoEntityRenderer<RainbowSkeletonEntity> {
 
+    private static final ResourceLocation GLOW_TEXTURE = ResourceLocation.fromNamespaceAndPath(TeaseMemeMod.MOD_ID, "textures/entity/rainbowskeleton.png");
+
     public RainbowSkeletonRenderer(EntityRendererProvider.Context renderManager) {
         super(renderManager, new RainbowSkeletonModel());
         this.shadowRadius = 0.5f;
@@ -23,7 +25,7 @@ public class RainbowSkeletonRenderer extends GeoEntityRenderer<RainbowSkeletonEn
 
     @Override
     public ResourceLocation getTextureLocation(RainbowSkeletonEntity animatable) {
-        return ResourceLocation.fromNamespaceAndPath(TeaseMemeMod.MOD_ID, "textures/entity/rainbowskeleton.png");
+        return GLOW_TEXTURE;
     }
 
     @Override

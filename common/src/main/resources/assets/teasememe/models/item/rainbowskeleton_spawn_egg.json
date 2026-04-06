@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "teasememe:item/rainbowskeleton_spawn_egg"
+    "layer0": "teasememe:entity/rainbowskeleton"
   }
 }

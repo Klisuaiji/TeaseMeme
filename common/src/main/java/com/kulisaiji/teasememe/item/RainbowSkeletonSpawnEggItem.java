@@ -6,6 +6,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
@@ -30,6 +31,10 @@ public class RainbowSkeletonSpawnEggItem extends Item {
         BlockPos blockPos = context.getClickedPos();
         Direction direction = context.getClickedFace();
         BlockPos spawnPos = blockPos.relative(direction);
+        
+        if (!RainbowSkeletonEntity.checkSpawnRules(entityType, serverLevel, MobSpawnType.SPAWN_EGG, spawnPos, serverLevel.getRandom())) {
+            return InteractionResult.FAIL;
+        }
         
         RainbowSkeletonEntity entity = this.entityType.create(serverLevel);
         if (entity != null) {
