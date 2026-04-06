@@ -21,6 +21,7 @@ public class ModEntities {
     public static final DeferredHolder<EntityType<?>, EntityType<RainbowSkeletonEntity>> RAINBOW_SKELETON = 
             ENTITIES.register("rainbowskeleton", () -> EntityType.Builder.of(RainbowSkeletonEntity::new, MobCategory.MONSTER)
                     .sized(0.6F, 1.99F)
+                    .setAttributes(RainbowSkeletonEntity::createAttributes)
                     .build(TeaseMemeMod.MOD_ID + ":rainbowskeleton"));
     
     public static final DeferredHolder<Item, Item> RAINBOW_SKELETON_SPAWN_EGG = 
